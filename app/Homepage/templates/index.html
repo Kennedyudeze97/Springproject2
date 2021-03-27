@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<!-- This section contain the whole of home page presentation layer -->
+<div class="home">
+    <div class="home-content col-8 mx-auto">
+        <h2 class="text-muted text-center">Final Project</h2>
+        <!-- The form to get friends -->
+        <div class="">
+            {{ wtf.quick_form(form) }}
+        </div>
+        <hr/>
+        <h4 class="text-warning">List of Friends</h4>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Second Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if friends | length > 0 %}
+                {% for friend in friends %}
+                    <tr>
+                        <td>{{friend.firstName}}</td>
+                        <td>{{friend.secondName}}</td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                <p>You've Not entered any friend</p>
+                {% endif %}
+            </tbody>
+        </table>
+        <a href="{{url_for('movies.FriendRender')}}" class="btn btn-outline-warning">Next</a>
+    </div>
+</div>
+
+{% endblock %}

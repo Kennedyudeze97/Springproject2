@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<!-- This will be giving the list of friends to choose and add Movies -->
+<div class="home">
+    <div class="container">
+        <h3 class="py-5">List of friends You've Entered</h3>
+        <p class="lead">Click on the name to Select a friend</p>
+        <table class="table table-bordered">
+            <thead class="thead-warning">
+                <tr>
+                    <th>First Name</th>
+                    <th>Second Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if friends | length > 0 %}
+                {% for friend in friends %}
+                    <tr>
+                            <td>
+                                <a href="{{ url_for('movies.AddMovies', id = friend.id) }}">{{ friend.firstName }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('movies.AddMovies', id = friend.id) }}">{{ friend.secondName }}</a>
+                            </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                    <p class="text-danger">No Friends yet</p>
+                {% endif %}
+            </tbody>
+        </table>
+        <a class="btn btn-outline-dark" href="{{ url_for('movies.RecommendMovie') }}">Get The Movie</a>
+    </div>
+</div>
+
+{% endblock %}

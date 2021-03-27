@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="home">
+<div class="container">
+    <h5 class="text-dark">List of all Friends Movies</h5>
+        {% for set in movies %}
+        <ul class="list-group my-5"></ul>
+            <li class="list-group-item">{{set.movie1}}</li>
+            <li class="list-group-item">{{set.movie2}}</li>
+            <li class="list-group-item">{{set.movie3}}</li>
+            <li class="list-group-item">{{set.movie4}}</li>
+            <li class="list-group-item">{{set.movie5}}</li>
+            <li class="list-group-item">{{set.movie6}}</li>
+            <li class="list-group-item">{{set.movie7}}</li>
+            <li class="list-group-item">{{set.movie8}}</li>
+            <li class="list-group-item">{{set.movie9}}</li>
+            <li class="list-group-item">{{set.movie10}}</li>
+        </ul>
+        {% endfor %}
+
+        <!-- Movie Recommendation -->
+        {% for movie in movies %}
+            <div class="d-flex justify-content-center lead my-4">
+                Recommended Movie: {{movie.movie5}}
+            </div>
+        {% endfor %}
+</div>
+
+</div>
+
+{% endblock %}

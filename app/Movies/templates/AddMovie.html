@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+
+<div class="home">
+<div class="container">
+    <h3 class="text-muted">Add Ten Favorite movies to this friend</h3>
+    <div class="col-8 mx-auto">
+        <p>You've selected: {{ friend.firstName }} {{ friend.secondName }}</p>
+        <p>Friend Id: {{ friend.id }} <span class="text-danger">(Use it on Friend Id field)</span></p>
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
+
+</div>
+
+{% endblock %}
