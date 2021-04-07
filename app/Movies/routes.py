@@ -4,6 +4,7 @@ from app import db
 from app.Movies.form import Movies
 from app.Movies.model import MoviesList
 from app.Homepage.model import Friends
+import random
 
 # Route to render list of friends
 @movies_bp.route('/friends', methods = ["GET"])
@@ -42,4 +43,29 @@ def AddMovies(id):
 @movies_bp.route('/recommend')
 def RecommendMovie():
     movies = MoviesList.query.all()
-    return render_template('DisplayMovies.html', movies = movies)
+    print(type(movies))
+    list=[]
+    for m in movies:
+        if m.movie1:
+            list.append(m.movie1)
+        if m.movie2:
+            list.append(m.movie2)
+        if m.movie3:
+            list.append(m.movie3)
+        if m.movie4:
+            list.append(m.movie4)
+        if m.movie5:
+            list.append(m.movie5)
+        if m.movie6:
+            list.append(m.movie6)
+        if m.movie7:
+            list.append(m.movie7)
+        if m.movie8:
+            list.append(m.movie8)
+        if m.movie9:
+            list.append(m.movie9)
+        if m.movie10:
+            list.append(m.movie10)
+    print(random.choice(list))
+
+    return render_template('DisplayMovies.html', movies = movies, randommovie = random.choice(list))
