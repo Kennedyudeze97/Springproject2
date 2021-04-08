@@ -4,12 +4,13 @@
 
 <div class="home">
 <div class="container">
-    <h3 class="text-muted">Add Ten Favorite movies to this friend</h3>
     <div class="col-8 mx-auto">
-        <p>You've selected: {{ friend.firstName }} {{ friend.secondName }}</p>
-        <p>Friend Id: {{ friend.id }} <span class="text-danger">(Use it on Friend Id field)</span></p>
+        <h3 class="text-muted">Edit {{ friend.firstName }}'s Ten Favorite movies</h3>
         {{ wtf.quick_form(form) }}
+        <br>
+        <a class="btn btn-outline-dark" href="{{ url_for('Home.Home') }}">Go Back To Homepage</a>
     </div>
+
 </div>
 
 </div>

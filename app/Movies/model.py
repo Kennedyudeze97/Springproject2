@@ -3,7 +3,7 @@ from app import db
 # Class to create the database on movies to be entered by a friend
 class MoviesList(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    friendId = db.Column(db.Integer)
+    friendId = db.Column(db.Integer, db.ForeignKey('friends.id'))
     movie1 = db.Column(db.String(64))
     movie2 = db.Column(db.String(64))
     movie3 = db.Column(db.String(64))

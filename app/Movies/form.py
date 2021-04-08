@@ -1,9 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, SelectMultipleField
 
 # flask Form on the ten friend's movies
 class Movies(FlaskForm):
-    friendId = StringField('Enter Friend Id')
     movie1 = StringField('Enter Movie-1')
     movie2 = StringField('Enter Movie-2')
     movie3 = StringField('Enter Movie-3')
@@ -14,4 +13,8 @@ class Movies(FlaskForm):
     movie8 = StringField('Enter Movie-8')
     movie9 = StringField('Enter Movie-9')
     movie10 = StringField('Enter Movie-10')
-    submit = SubmitField('Enter')
+    submit = SubmitField('Submit')
+
+class FriendsSelectForm(FlaskForm):
+    selectedfriends = SelectMultipleField('Hold Control and click to select/unselect (multiple) friends', coerce=int)
+    submit = SubmitField('Submit')

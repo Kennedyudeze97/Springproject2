@@ -1,28 +1,32 @@
 {% extends 'base.html' %}
-{% block content %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
+
+{% block content %}
 <div class="home">
 <div class="container">
-    <h5 class="text-dark">List of all Friends Movies</h5>
-        {% for set in movies %}
-        <ul class="list-group my-5"></ul>
-            <li class="list-group-item">{{set.movie1}}</li>
-            <li class="list-group-item">{{set.movie2}}</li>
-            <li class="list-group-item">{{set.movie3}}</li>
-            <li class="list-group-item">{{set.movie4}}</li>
-            <li class="list-group-item">{{set.movie5}}</li>
-            <li class="list-group-item">{{set.movie6}}</li>
-            <li class="list-group-item">{{set.movie7}}</li>
-            <li class="list-group-item">{{set.movie8}}</li>
-            <li class="list-group-item">{{set.movie9}}</li>
-            <li class="list-group-item">{{set.movie10}}</li>
-        </ul>
-        {% endfor %}
+    <h2>Movie Recommendation Page</h2>
+    <h5 class="text-dark">Submit Participating Friends First to Obtain a Movie Recommendation</h5>
+    <div class="">
+            {{ wtf.quick_form(form) }}
+        </div>
+    <br>
+    <br>
+    <h5 class="text-dark">Movie Pool</h5>
+    <ol>
+    {% for n in  movie_pool%}
+        <li class="btn btn-outline-bright">{{n}}</li>
+    {% endfor %}
+    </ol>
+
 
         <!-- Movie Recommendation -->
-            <div class="d-flex justify-content-center lead my-4">
-                Recommended Movie: {{randommovie}}
+            <div class="d-flex justify-content-center">
+               <h3>Recommended Movie: {{randommovie}}</h3>
             </div>
+    <br>
+    <br>
+    <a class="btn btn-outline-dark" href="{{ url_for('Home.Home') }}">Go Back To Homepage</a>
 </div>
 
 </div>
