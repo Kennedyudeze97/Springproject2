@@ -21,11 +21,17 @@
         <!-- The Table containing list of friends and Actions (like modifying their movies etc) -->
         <!-- Action involves url to modify Friend's preference page with a GET method using friend's ID -->
         <table class="table table-bordered">
+                {% for message in messages %}
+            <div class="alert alert-primary" role="alert">
+                {{message}}
+            </div>
+            {% endfor %}
             <thead class="thead-dark">
                 <tr>
                     <th>First Name</th>
                     <th>Second Name</th>
-                    <th> Action </th>
+                    <th> Action 1 </th>
+                    <th> Action 2 </th>
                 </tr>
             </thead>
             <tbody>
@@ -35,6 +41,7 @@
                         <td>{{friend.firstName}}</td>
                         <td>{{friend.secondName}}</td>
                         <td><a href="{{ url_for('movies.AddMovies', id = friend.id) }}">Modify Movie Preference</a></td>
+                        <td><a href="{{ url_for('Home.delete', _id = friend.id) }}">Delete Friend Record</a></td>
                     </tr>
                 {% endfor %}
                 {% else %}
