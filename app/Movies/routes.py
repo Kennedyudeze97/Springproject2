@@ -6,14 +6,16 @@ from app.Movies.model import MoviesList
 from app.Homepage.model import Friends
 import random
 
+# Route to the page that enables modifying of friend's movie list
 @movies_bp.route("/AddMovies/<int:id>", methods=['POST','GET'])
 def AddMovies(id):
-
+    # Get friend from the database
     current_friend = Friends.query.get_or_404(id)
     form = Movies()
+    # Get the movies of the friend selected
     userMovies = MoviesList.query.filter_by(friendId=id).first()
-    print(userMovies is None)
 
+    # If a form is POSTED, it is validated and then movies data obtained
     if form.validate_on_submit():
         # Insert data into the database
         movies = MoviesList(
@@ -28,6 +30,8 @@ def AddMovies(id):
             movie8 = form.movie8.data,
             movie9 = form.movie9.data,
             movie10 = form.movie10.data)
+
+        # Check if the friend has movies list. if not, add movies to list. if so, modify(Update) current movies
         if userMovies is None:
             db.session.add(movies)
         else:
@@ -43,7 +47,10 @@ def AddMovies(id):
             userMovies.movie10 = form.movie10.data
         db.session.commit()
 
+        # Go back to homepage
         return redirect(url_for('Home.Home'))
+
+    # Create form. if friend has a movie list, populate form with necessary data
     if userMovies is None:
         form = Movies()
     else:
@@ -57,23 +64,31 @@ def AddMovies(id):
         form.movie8.data = userMovies.movie8
         form.movie9.data = userMovies.movie9
         form.movie10.data = userMovies.movie10
+
+    # Return the html page to modify user's movies list
     return render_template('AddMovie.html', form= form, id=id, friend=current_friend)
 
-
+# Route to the Movie recommendation page
 @movies_bp.route('/recommend', methods=['POST','GET'])
 def RecommendMovie():
-
+    # Create the form object for the selection of participating friends
     form = FriendsSelectForm()
-
+    # Query db for a list of all friends
     friends = Friends.query.all()
-
+    # Create a set of friend's details to be used in the friend's selection form
     friendslist = [(i.id, i.firstName) for i in friends]
     form.selectedfriends.choices = friendslist
-
+    # Create a list of movies for the movie pool
     list = []
+
+    # Validate form of selected friends
     if form.validate_on_submit():
+
+        # Loop through each friend selected for the movie night and obtain their movie list form db
         for n in form.selectedfriends.data:
             movies = MoviesList.query.filter_by(friendId=n)
+
+            # Populate movies list with all the movies in the selected friend's movie list
             for m in movies:
                 if m.movie1:
                     list.append(m.movie1)
@@ -96,12 +111,11 @@ def RecommendMovie():
                 if m.movie10:
                     list.append(m.movie10)
 
-    movies = MoviesList.query.all()
-    print(type(movies))
-
+    # Check if list has any value and return the movies as a pool. Otherwise print  No movie in pool
     if len(list)>0:
         randomMovie=random.choice(list)
     else:
         randomMovie="No Movie in Pool."
 
+    # Render the html page for movie recommendation
     return render_template('DisplayMovies.html', movie_pool = list, movies = movies, randommovie = randomMovie, form = form)

@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-
 {% block content %}
+
+<!-- Movie recommendation page -->
 <div class="home">
 <div class="container">
     <h2>Movie Recommendation Page</h2>
     <h5 class="text-dark">Submit Participating Friends First to Obtain a Movie Recommendation</h5>
+    <!-- The form to choose participating friends in the movie night -->
     <div class="">
             {{ wtf.quick_form(form) }}
         </div>
     <br>
     <br>
     <h5 class="text-dark">Movie Pool</h5>
+
+    <!-- List of movies in pool -->
     <ol>
     {% for n in  movie_pool%}
         <li class="btn btn-outline-bright">{{n}}</li>
@@ -26,6 +30,7 @@
             </div>
     <br>
     <br>
+    <!-- Link to homepage -->
     <a class="btn btn-outline-dark" href="{{ url_for('Home.Home') }}">Go Back To Homepage</a>
 </div>
 

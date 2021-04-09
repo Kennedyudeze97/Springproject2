@@ -12,6 +12,8 @@
         </div>
         <hr/>
         <h4 class="text-dark">List of Friends</h4>
+        <!-- The Table containing list of friends and Actions (like modifying their movies etc) -->
+        <!-- Action involves url to modify Friend's preference page with a GET method using friend's ID -->
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -34,6 +36,7 @@
                 {% endif %}
             </tbody>
         </table>
+        <!-- Button to Movie Recommendation Page -->
         <a class="btn btn-outline-dark" href="{{ url_for('movies.RecommendMovie') }}">Go To The Movie Recommendation Page</a>
     </div>
 </div>

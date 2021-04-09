@@ -2,12 +2,14 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 {% block content %}
 
+<!-- The page for modifying friend's movie list -->
 <div class="home">
 <div class="container">
     <div class="col-8 mx-auto">
         <h3 class="text-muted">Edit {{ friend.firstName }}'s Ten Favorite movies</h3>
         {{ wtf.quick_form(form) }}
         <br>
+        <!-- Link to the Homepage -->
         <a class="btn btn-outline-dark" href="{{ url_for('Home.Home') }}">Go Back To Homepage</a>
     </div>
 

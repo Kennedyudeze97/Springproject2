@@ -9,13 +9,18 @@ from app import db
 def Home():
     # Query all friends in the database
     friends = Friends.query.all()
+
     # Call the form instance
     form = FriendsInput()
 
+    # On validation, insert POST details into database and commit
     if form.validate_on_submit():
         data = Friends(firstName = form.firstName.data, secondName = form.secondName.data)
         db.session.add(data)
         db.session.commit()
 
+        # Run the route to the homepage
         return redirect(url_for('Home.Home'))
+
+    # Return index.html which is the homepage
     return render_template('index.html', friends = friends, form = form)
