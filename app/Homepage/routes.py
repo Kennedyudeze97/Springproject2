@@ -13,8 +13,14 @@ def Home():
     # Call the form instance
     form = FriendsInput()
 
+    # Error list
+    errors = []
+
     # On validation, insert POST details into database and commit
     if form.validate_on_submit():
+        if (Friends.query.filter_by(firstName=form.firstName.data) and Friends.query.filter_by(secondName=form.secondName.data)):
+            errors.append("Friend already exists.")
+            return render_template('index.html', friends=friends, form=form, errors=errors)
         data = Friends(firstName = form.firstName.data, secondName = form.secondName.data)
         db.session.add(data)
         db.session.commit()

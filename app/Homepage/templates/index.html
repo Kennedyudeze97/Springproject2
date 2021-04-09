@@ -7,11 +7,17 @@
     <div class="home-content col-8 mx-auto">
         <h2 class="text-muted text-center">Home Page</h2>
         <!-- The form to register friends -->
+        {% for error in errors %}
+        <div class="alert alert-primary" role="alert">
+            {{error}}
+        </div>
+        {% endfor %}
         <div class="">
             {{ wtf.quick_form(form) }}
         </div>
         <hr/>
         <h4 class="text-dark">List of Friends</h4>
+
         <!-- The Table containing list of friends and Actions (like modifying their movies etc) -->
         <!-- Action involves url to modify Friend's preference page with a GET method using friend's ID -->
         <table class="table table-bordered">
