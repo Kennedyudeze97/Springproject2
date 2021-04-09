@@ -118,4 +118,4 @@ def RecommendMovie():
         randomMovie="No Movie in Pool."
 
     # Render the html page for movie recommendation
-    return render_template('DisplayMovies.html', movie_pool = list, movies = movies, randommovie = randomMovie, form = form)
+    return render_template('DisplayMovies.html', movie_pool = list, randommovie = randomMovie, form = form)

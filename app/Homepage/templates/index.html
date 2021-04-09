@@ -41,7 +41,13 @@
                         <td>{{friend.firstName}}</td>
                         <td>{{friend.secondName}}</td>
                         <td><a href="{{ url_for('movies.AddMovies', id = friend.id) }}">Modify Movie Preference</a></td>
-                        <td><a href="{{ url_for('Home.delete', _id = friend.id) }}">Delete Friend Record</a></td>
+<!--                        <td><a href="{{ url_for('Home.delete', _id = friend.id) }}">Delete Friend Record</a></td>-->
+                        <td>
+                            <a href = "{{url_for ('Home.delete', _id = friend.id)}}"
+                           onclick = "{if(confirm ( 'Delete record permanently?'))
+                           {this. document.formname.submit (); return true;} return false;} "
+                            title="Permanently delete {{friend.firstName}}'s details and movies list."> delete </a>
+                        </td>
                     </tr>
                 {% endfor %}
                 {% else %}
@@ -49,6 +55,7 @@
                 {% endif %}
             </tbody>
         </table>
+<!--        -->
         <!-- Button to Movie Recommendation Page -->
         <a class="btn btn-outline-dark" href="{{ url_for('movies.RecommendMovie') }}">Go To The Movie Recommendation Page</a>
     </div>
